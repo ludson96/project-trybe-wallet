@@ -24,7 +24,6 @@ class Login extends React.Component {
 
   handlerSubmit() {
     const { history, actionGetEmail } = this.props;
-    console.log(this.state);
     actionGetEmail(this.state);
     history.push('/carteira');
   }
@@ -33,7 +32,6 @@ class Login extends React.Component {
     const { password, email } = this.state;
     let isDisabled = true;
     const NUMBER = 6;
-    // const VALID = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
     if (password.length >= NUMBER && /\S+@\S+\.\S+/.test(email)) {
       isDisabled = false;
     } else {
