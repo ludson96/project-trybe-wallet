@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { deleteExpense } from '../redux/actions';
 
 class Table extends Component {
+  constructor() {
+    super();
+
+    this.clickDelete = this.clickDelete.bind(this);
+  }
+
+  clickDelete({ target }) {
+    const { expenses, delExpense } = this.props;
+
+    const updatedExpenses = expenses.filter((coin) => coin.id !== Number(target.id));
+    delExpense(updatedExpenses);
+  }
+
   render() {
     const { expenses } = this.props;
-    console.log('Eu sou o expenses: ', expenses[0]);
     return (
       <table>
         <thead>
@@ -23,12 +36,10 @@ class Table extends Component {
         </thead>
         <tbody>
           {expenses && expenses.map((coin) => {
-            console.log(coin.exchangeRates[coin.currency]);
             const { name, ask } = coin.exchangeRates[coin.currency];
-            const teste = name.split('/');
-            console.log('coin: ', Number(ask).toFixed(2));
+            const filtro = name.split('/');
             return (
-              <tr key={ expenses.id }>
+              <tr key={ coin.id }>
                 <td>{coin.description}</td>
                 <td>{coin.tag}</td>
                 <td>{coin.method}</td>
@@ -36,7 +47,18 @@ class Table extends Component {
                 <td>{name}</td>
                 <td>{Number(ask).toFixed(2)}</td>
                 <td>{(Number(coin.value) * Number(ask)).toFixed(2)}</td>
-                <td>{teste[1]}</td>
+                <td>{filtro[1]}</td>
+                <td>
+                  <button type="button">Editar</button>
+                  <button
+                    type="button"
+                    id={ coin.id }
+                    data-testid="delete-btn"
+                    onClick={ this.clickDelete }
+                  >
+                    Excluir
+                  </button>
+                </td>
               </tr>
             );
           })}
@@ -51,7 +73,11 @@ Table.propTypes = {
 }.isRequired;
 
 const mapStateToProps = (state) => ({
-  expenses: state.wallet.expenses,
+  ...state.wallet,
 });
 
-export default connect(mapStateToProps)(Table);
+const mapDispatchToProps = (dispatch) => ({
+  delExpense: (updatedExpenses) => dispatch(deleteExpense(updatedExpenses)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

@@ -1,5 +1,5 @@
 import {
-  REQUEST_COIN, REQUEST_COIN_SUCESS, REQUEST_COIN_FAILURE, SAVE_TYPE,
+  REQUEST_COIN, REQUEST_COIN_SUCESS, REQUEST_COIN_FAILURE, SAVE_TYPE, DELETE_EXPENSE,
 } from '../actions/index';
 
 const INITIAL_STATE = {
@@ -8,14 +8,14 @@ const INITIAL_STATE = {
   expenses: [],
 };
 
-const createId = (expenses) => {
-  if (expenses.length) {
-    return expenses.map((element, i) => {
-      const teste = (element.id = i, element);
-      return teste;
-    });
-  }
-};
+// const addId = (expenses) => {
+//   if (expenses.length) {
+//     return expenses.map((element, i) => {
+//       const teste = (element.id = i, element);
+//       return teste;
+//     });
+//   }
+// };
 
 const update = (expense, currencies) => {
   const coinInfo = Object.entries(currencies)
@@ -33,6 +33,7 @@ const wallet = (state = INITIAL_STATE, action) => {
   case REQUEST_COIN: return {
     ...state,
   };
+
   case REQUEST_COIN_SUCESS: {
     const coinFilter = Object.keys(action.currencies)
       .filter((coin) => coin !== 'USDT');
@@ -41,17 +42,25 @@ const wallet = (state = INITIAL_STATE, action) => {
       currencies: coinFilter,
     };
   }
+
   case REQUEST_COIN_FAILURE: return {
     ...state,
     error: action.error,
   };
+
   case SAVE_TYPE: {
     const teste = [...state.expenses, update(action.expense, action.currencies)];
     return {
       ...state,
-      expenses: createId(teste),
+      expenses: teste,
     };
   }
+
+  case DELETE_EXPENSE: return {
+    ...state,
+    expenses: action.updatedExpenses,
+  };
+
   default: return state;
   }
 };

@@ -8,11 +8,12 @@ class WalletForm extends Component {
     super();
 
     this.state = {
+      id: 0,
       value: '',
       description: '',
       currency: 'USD',
-      method: 'dinheiro',
-      tag: 'alimentacao',
+      method: 'Dinheiro',
+      tag: 'Alimentacao',
     };
 
     this.handleChangeGeneric = this.handleChangeGeneric.bind(this);
@@ -32,7 +33,9 @@ class WalletForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { handleSubmit } = this.props;
+    const { id } = this.state;
     this.setState({
+      id: id + 1,
       value: '',
       description: '',
       currency: 'USD',

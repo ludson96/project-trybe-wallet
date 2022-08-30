@@ -9,6 +9,9 @@ export const REQUEST_COIN_FAILURE = 'REQUEST_COIN_FAILURE';
 // Type da action que pega os estados locais de WalletForm e manda para o global
 export const SAVE_TYPE = 'SAVE_TYPE';
 
+// Type da action que deleta despesa
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+
 //  Action que salva email no estado global
 export const actionEmail = (email) => ({ type: EMAIL_TYPE, email });
 
@@ -55,3 +58,8 @@ export const fetchISSSave = (expense) => async (dispatch) => {
     dispatch(receiveISSCurrenciesFailure(error.message));
   }
 };
+
+// Action para deletar despesas
+export const deleteExpense = (updatedExpenses) => ({
+  type: DELETE_EXPENSE, updatedExpenses,
+});
