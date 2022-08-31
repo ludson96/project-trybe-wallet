@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteExpense } from '../redux/actions';
+import { deleteExpense, editExpense } from '../redux/actions';
 
 class Table extends Component {
   constructor() {
     super();
 
     this.clickDelete = this.clickDelete.bind(this);
+    this.clickEdit = this.clickEdit.bind(this);
+  }
+
+  clickEdit({ target }) {
+    const { editDespesa, editor } = this.props;
+
+    const idToEdit = Number(target.id);
+
+    editDespesa(editor, idToEdit);
   }
 
   clickDelete({ target }) {
@@ -49,7 +58,14 @@ class Table extends Component {
                 <td>{(Number(coin.value) * Number(ask)).toFixed(2)}</td>
                 <td>{filtro[1]}</td>
                 <td>
-                  <button type="button">Editar</button>
+                  <button
+                    type="button"
+                    id={ coin.id }
+                    data-testid="edit-btn"
+                    onClick={ this.clickEdit }
+                  >
+                    Editar
+                  </button>
                   <button
                     type="button"
                     id={ coin.id }
@@ -73,11 +89,13 @@ Table.propTypes = {
 }.isRequired;
 
 const mapStateToProps = (state) => ({
-  ...state.wallet,
+  expenses: state.wallet.expenses,
+  editor: state.wallet.editor,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   delExpense: (updatedExpenses) => dispatch(deleteExpense(updatedExpenses)),
+  editDespesa: (editor, idToEdit) => dispatch(editExpense(editor, idToEdit)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

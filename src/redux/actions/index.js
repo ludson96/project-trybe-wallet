@@ -12,6 +12,9 @@ export const SAVE_TYPE = 'SAVE_TYPE';
 // Type da action que deleta despesa
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
+// Type da action que edita despesa
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+
 //  Action que salva email no estado global
 export const actionEmail = (email) => ({ type: EMAIL_TYPE, email });
 
@@ -62,4 +65,9 @@ export const fetchISSSave = (expense) => async (dispatch) => {
 // Action para deletar despesas
 export const deleteExpense = (updatedExpenses) => ({
   type: DELETE_EXPENSE, updatedExpenses,
+});
+
+// Action de editar despesas
+export const editExpense = (editor, idToEdit) => ({
+  type: EDIT_EXPENSE, editor, idToEdit,
 });

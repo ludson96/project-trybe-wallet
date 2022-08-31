@@ -32,23 +32,46 @@ class WalletForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { handleSubmit } = this.props;
-    const { id } = this.state;
-    this.setState({
-      id: id + 1,
-      value: '',
-      description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
-    });
+    const { vaifilhao, editor } = this.props;
+    if (editor) {
+      const { expenses, idToEdit } = this.props;
+      const { value, description, currency, method, tag } = this.state;
+      const updatedExpenses = expenses.filter((coin) => coin.id !== Number(idToEdit));
+      const teste = {
+        id: idToEdit,
+        value,
+        description,
+        currency,
+        method,
+        tag,
+      };
 
-    handleSubmit(this.state);
+      const novoArray = updatedExpenses.concat(teste).sort((a, b) => {
+        const MENOS_UM = -1;
+        if (a.id < b.id) {
+          return MENOS_UM;
+        }
+        return true;
+      });
+      console.log(novoArray);
+    } else {
+      const { id } = this.state;
+      this.setState({
+        id: id + 1,
+        value: '',
+        description: '',
+        currency: 'USD',
+        method: 'Dinheiro',
+        tag: 'Alimentação',
+      });
+
+      vaifilhao(this.state);
+    }
   }
 
   render() {
     const { value, description, currency, method, tag } = this.state;
-    const { currencies } = this.props;
+    const { currencies, editor } = this.props;
     return (
       <div>
         <form>
@@ -123,7 +146,7 @@ class WalletForm extends Component {
             type="button"
             onClick={ this.handleSubmit }
           >
-            Adicionar despesa
+            {editor ? 'Editar despesa' : 'Adicionar despesa'}
 
           </button>
         </form>
@@ -145,10 +168,13 @@ WalletForm.propTypes = {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  editor: state.wallet.editor,
+  expenses: state.wallet.expenses,
+  idToEdit: state.wallet.idToEdit,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleSubmit: (state) => dispatch(fetchISSSave(state)),
+  vaifilhao: (state) => dispatch(fetchISSSave(state)),
   onLoad: () => dispatch(fetchISSCurrencies()),
 });
 

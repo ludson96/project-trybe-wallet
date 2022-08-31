@@ -1,21 +1,15 @@
 import {
-  REQUEST_COIN, REQUEST_COIN_SUCESS, REQUEST_COIN_FAILURE, SAVE_TYPE, DELETE_EXPENSE,
+  REQUEST_COIN, REQUEST_COIN_SUCESS, REQUEST_COIN_FAILURE,
+  SAVE_TYPE, DELETE_EXPENSE, EDIT_EXPENSE,
 } from '../actions/index';
 
 const INITIAL_STATE = {
   currencies: [],
-  error: '',
   expenses: [],
+  editor: false,
+  idToEdit: '',
+  error: '',
 };
-
-// const addId = (expenses) => {
-//   if (expenses.length) {
-//     return expenses.map((element, i) => {
-//       const teste = (element.id = i, element);
-//       return teste;
-//     });
-//   }
-// };
 
 const update = (expense, currencies) => {
   const coinInfo = Object.entries(currencies)
@@ -60,6 +54,19 @@ const wallet = (state = INITIAL_STATE, action) => {
     ...state,
     expenses: action.updatedExpenses,
   };
+
+  case EDIT_EXPENSE:
+    if (!action.editor) {
+      state.editor = true;
+    } else {
+      state.editor = false;
+    }
+    console.log(action);
+    return {
+      ...state,
+      editor: state.editor,
+      idToEdit: action.idToEdit,
+    };
 
   default: return state;
   }
