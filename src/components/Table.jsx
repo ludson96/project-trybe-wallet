@@ -12,9 +12,11 @@ class Table extends Component {
   }
 
   clickEdit({ target }) {
-    const { editDespesa, editor } = this.props;
+    const { editDespesa } = this.props;
+    let { editor } = this.props;
 
     const idToEdit = Number(target.id);
+    editor = true;
 
     editDespesa(editor, idToEdit);
   }
@@ -28,6 +30,7 @@ class Table extends Component {
 
   render() {
     const { expenses } = this.props;
+    console.log('Eu sou expenses do table:', expenses);
     return (
       <table>
         <thead>

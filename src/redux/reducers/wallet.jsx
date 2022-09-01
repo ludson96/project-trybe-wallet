@@ -1,6 +1,6 @@
 import {
   REQUEST_COIN, REQUEST_COIN_SUCESS, REQUEST_COIN_FAILURE,
-  SAVE_TYPE, DELETE_EXPENSE, EDIT_EXPENSE,
+  SAVE_TYPE, DELETE_EXPENSE, EDIT_EXPENSE, EDITA_DESPESAS_FINAL,
 } from '../actions/index';
 
 const INITIAL_STATE = {
@@ -9,6 +9,7 @@ const INITIAL_STATE = {
   editor: false,
   idToEdit: '',
   error: '',
+  data: '',
 };
 
 const update = (expense, currencies) => {
@@ -47,6 +48,7 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: teste,
+      data: action.currencies,
     };
   }
 
@@ -56,16 +58,17 @@ const wallet = (state = INITIAL_STATE, action) => {
   };
 
   case EDIT_EXPENSE:
-    if (!action.editor) {
-      state.editor = true;
-    } else {
-      state.editor = false;
-    }
-    console.log(action);
+
     return {
       ...state,
-      editor: state.editor,
+      editor: action.editor,
       idToEdit: action.idToEdit,
+    };
+
+  case EDITA_DESPESAS_FINAL:
+    return {
+      ...state,
+      expenses: action.expense,
     };
 
   default: return state;
