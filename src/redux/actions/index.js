@@ -15,6 +15,8 @@ export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 // Type da action que edita despesa
 export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 
+export const EDITA_DESPESAS_FINAL = 'EDITA_DESPESAS_FINAL';
+
 //  Action que salva email no estado global
 export const actionEmail = (email) => ({ type: EMAIL_TYPE, email });
 
@@ -71,3 +73,5 @@ export const deleteExpense = (updatedExpenses) => ({
 export const editExpense = (editor, idToEdit) => ({
   type: EDIT_EXPENSE, editor, idToEdit,
 });
+
+export const editaDespesasFinal = (expense) => ({ type: EDITA_DESPESAS_FINAL, expense });

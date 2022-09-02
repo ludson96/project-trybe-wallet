@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchISSCurrencies, fetchISSSave } from '../redux/actions/index';
+import {
+  fetchISSCurrencies, fetchISSSave, editExpense, editaDespesasFinal,
+} from '../redux/actions/index';
 
 class WalletForm extends Component {
   constructor() {
@@ -14,6 +16,7 @@ class WalletForm extends Component {
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentacao',
+      exchangeRates: {},
     };
 
     this.handleChangeGeneric = this.handleChangeGeneric.bind(this);
@@ -30,17 +33,18 @@ class WalletForm extends Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const { vaifilhao, editor } = this.props;
+  handleSubmit() {
+    const { vaifilhao, editDespesa } = this.props;
+    let { editor } = this.props;
     if (editor) {
-      const { expenses, idToEdit } = this.props;
+      const { expenses, idToEdit, data, vaiFinal } = this.props;
       const { value, description, currency, method, tag } = this.state;
       const updatedExpenses = expenses.filter((coin) => coin.id !== Number(idToEdit));
       const teste = {
         id: idToEdit,
         value,
         description,
+        exchangeRates: data,
         currency,
         method,
         tag,
@@ -53,7 +57,19 @@ class WalletForm extends Component {
         }
         return true;
       });
-      console.log(novoArray);
+      console.log('Eu sou o editor true');
+      vaiFinal(novoArray);
+      editor = false;
+      editDespesa(editor);
+      const { id } = this.state;
+      this.setState({
+        id: id + 1,
+        value: '',
+        description: '',
+        currency: 'USD',
+        method: 'Dinheiro',
+        tag: 'Alimentação',
+      });
     } else {
       const { id } = this.state;
       this.setState({
@@ -64,7 +80,7 @@ class WalletForm extends Component {
         method: 'Dinheiro',
         tag: 'Alimentação',
       });
-
+      console.log(this.state);
       vaifilhao(this.state);
     }
   }
@@ -80,6 +96,7 @@ class WalletForm extends Component {
             <input
               type="number"
               name="value"
+              id="value"
               data-testid="value-input"
               value={ value }
               onChange={ this.handleChangeGeneric }
@@ -91,6 +108,7 @@ class WalletForm extends Component {
             <input
               type="text"
               name="description"
+              id="description"
               data-testid="description-input"
               value={ description }
               onChange={ this.handleChangeGeneric }
@@ -113,9 +131,10 @@ class WalletForm extends Component {
           </label>
 
           <label htmlFor="method">
-            Método de pagemento:
+            Método de pagamento:
             <select
               name="method"
+              id="method"
               data-testid="method-input"
               value={ method }
               onChange={ this.handleChangeGeneric }
@@ -130,6 +149,7 @@ class WalletForm extends Component {
             Categoria:
             <select
               name="tag"
+              id="tag"
               data-testid="tag-input"
               value={ tag }
               onChange={ this.handleChangeGeneric }
@@ -144,7 +164,9 @@ class WalletForm extends Component {
 
           <button
             type="button"
+            id="edit"
             onClick={ this.handleSubmit }
+            data-testid="button-input"
           >
             {editor ? 'Editar despesa' : 'Adicionar despesa'}
 
@@ -171,11 +193,15 @@ const mapStateToProps = (state) => ({
   editor: state.wallet.editor,
   expenses: state.wallet.expenses,
   idToEdit: state.wallet.idToEdit,
+  data: state.wallet.data,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   vaifilhao: (state) => dispatch(fetchISSSave(state)),
   onLoad: () => dispatch(fetchISSCurrencies()),
+  editDespesa: (editor) => dispatch(editExpense(editor)),
+  vaiFinal: (expense) => dispatch(editaDespesasFinal(expense)),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);

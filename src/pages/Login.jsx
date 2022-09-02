@@ -46,6 +46,7 @@ class Login extends React.Component {
             <input
               type="email"
               name="email"
+              id="email"
               data-testid="email-input"
               required
               onChange={ this.handlerChangeGeneric }
@@ -57,6 +58,7 @@ class Login extends React.Component {
             <input
               type="text"
               name="password"
+              id="password"
               data-testid="password-input"
               minLength={ 6 }
               required
