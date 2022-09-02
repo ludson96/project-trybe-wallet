@@ -132,9 +132,9 @@ describe('Testando Table.jsx e WalletForm.jsx', () => {
     expect(dtnEditExpenses).toBeInTheDocument();
 
     userEvent.type(value, '20');
-    // userEvent.click(dtnEditExpenses);
+    userEvent.click(dtnEditExpenses);
 
-    // expect(valueTd[3]).toHaveTextContent('20.00');
+    expect(valueTd[3]).toHaveTextContent('20.00');
   });
 
   it('Testando se ', async () => {

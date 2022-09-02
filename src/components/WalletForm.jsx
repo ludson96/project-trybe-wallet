@@ -16,6 +16,7 @@ class WalletForm extends Component {
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentacao',
+      exchangeRates: {},
     };
 
     this.handleChangeGeneric = this.handleChangeGeneric.bind(this);
@@ -32,8 +33,7 @@ class WalletForm extends Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit(event) {
-    // event.preventDefault();
+  handleSubmit() {
     const { vaifilhao, editDespesa } = this.props;
     let { editor } = this.props;
     if (editor) {
@@ -80,7 +80,7 @@ class WalletForm extends Component {
         method: 'Dinheiro',
         tag: 'Alimentação',
       });
-      console.log('eu sou o editor false');
+      console.log(this.state);
       vaifilhao(this.state);
     }
   }
