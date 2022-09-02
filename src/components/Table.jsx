@@ -30,7 +30,6 @@ class Table extends Component {
 
   render() {
     const { expenses } = this.props;
-    console.log('Eu sou expenses do table:', expenses);
     return (
       <table>
         <thead>

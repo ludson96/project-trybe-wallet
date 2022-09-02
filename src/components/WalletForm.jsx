@@ -33,7 +33,7 @@ class WalletForm extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    // event.preventDefault();
     const { vaifilhao, editDespesa } = this.props;
     let { editor } = this.props;
     if (editor) {
@@ -57,10 +57,10 @@ class WalletForm extends Component {
         }
         return true;
       });
-      editor = false;
-      console.log('novo array: ', novoArray);
-      editDespesa(editor);
+      console.log('Eu sou o editor true');
       vaiFinal(novoArray);
+      editor = false;
+      editDespesa(editor);
       const { id } = this.state;
       this.setState({
         id: id + 1,
@@ -80,7 +80,7 @@ class WalletForm extends Component {
         method: 'Dinheiro',
         tag: 'Alimentação',
       });
-      // console.log(this.state);
+      console.log('eu sou o editor false');
       vaifilhao(this.state);
     }
   }
@@ -96,6 +96,7 @@ class WalletForm extends Component {
             <input
               type="number"
               name="value"
+              id="value"
               data-testid="value-input"
               value={ value }
               onChange={ this.handleChangeGeneric }
@@ -107,6 +108,7 @@ class WalletForm extends Component {
             <input
               type="text"
               name="description"
+              id="description"
               data-testid="description-input"
               value={ description }
               onChange={ this.handleChangeGeneric }
@@ -129,9 +131,10 @@ class WalletForm extends Component {
           </label>
 
           <label htmlFor="method">
-            Método de pagemento:
+            Método de pagamento:
             <select
               name="method"
+              id="method"
               data-testid="method-input"
               value={ method }
               onChange={ this.handleChangeGeneric }
@@ -146,6 +149,7 @@ class WalletForm extends Component {
             Categoria:
             <select
               name="tag"
+              id="tag"
               data-testid="tag-input"
               value={ tag }
               onChange={ this.handleChangeGeneric }
@@ -160,7 +164,9 @@ class WalletForm extends Component {
 
           <button
             type="button"
+            id="edit"
             onClick={ this.handleSubmit }
+            data-testid="button-input"
           >
             {editor ? 'Editar despesa' : 'Adicionar despesa'}
 
