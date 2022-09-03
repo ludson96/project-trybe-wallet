@@ -21,10 +21,15 @@ class Header extends Component {
         <h2>TrybeWallet</h2>
         <div>
           <p data-testid="email-field">{ `Email: ${email}` }</p>
-          <p data-testid="total-field">
-            {`Despesa total: ${total.toFixed(2)}`}
+
+          <p>
+            {'Despesa total: '}
+            <span data-testid="total-field">
+              {total.toFixed(2)}
+            </span>
+
             <span data-testid="header-currency-field">
-              BRL
+              {' BRL'}
             </span>
           </p>
         </div>

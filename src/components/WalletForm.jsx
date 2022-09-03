@@ -16,7 +16,6 @@ class WalletForm extends Component {
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentacao',
-      exchangeRates: {},
     };
 
     this.handleChangeGeneric = this.handleChangeGeneric.bind(this);
@@ -33,7 +32,8 @@ class WalletForm extends Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault();
     const { vaifilhao, editDespesa } = this.props;
     let { editor } = this.props;
     if (editor) {
@@ -57,10 +57,9 @@ class WalletForm extends Component {
         }
         return true;
       });
-      console.log('Eu sou o editor true');
-      vaiFinal(novoArray);
       editor = false;
       editDespesa(editor);
+      vaiFinal(novoArray);
       const { id } = this.state;
       this.setState({
         id: id + 1,
@@ -80,7 +79,6 @@ class WalletForm extends Component {
         method: 'Dinheiro',
         tag: 'Alimentação',
       });
-      console.log(this.state);
       vaifilhao(this.state);
     }
   }
@@ -134,8 +132,8 @@ class WalletForm extends Component {
             Método de pagamento:
             <select
               name="method"
-              id="method"
               data-testid="method-input"
+              id="method"
               value={ method }
               onChange={ this.handleChangeGeneric }
             >
@@ -149,8 +147,8 @@ class WalletForm extends Component {
             Categoria:
             <select
               name="tag"
-              id="tag"
               data-testid="tag-input"
+              id="tag"
               value={ tag }
               onChange={ this.handleChangeGeneric }
             >
@@ -164,9 +162,7 @@ class WalletForm extends Component {
 
           <button
             type="button"
-            id="edit"
             onClick={ this.handleSubmit }
-            data-testid="button-input"
           >
             {editor ? 'Editar despesa' : 'Adicionar despesa'}
 
