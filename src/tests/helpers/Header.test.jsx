@@ -138,6 +138,7 @@ describe('Testando Table.jsx e WalletForm.jsx', () => {
     fireEvent.change(MWthod, 'Cartão de crédito');
     userEvent.click(btnAdc);
 
+    console.log(store.getState());
     await waitFor(() => expect(store.getState().wallet.expenses[0].value).toBe('40'));
     expect(value).toHaveValue(null);
   });
