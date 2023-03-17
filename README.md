@@ -9,7 +9,7 @@
 ## Informações de aprendizados
 
 - Este é um projeto desenvolvido para aprender `Redux`;
-- Primeiro teste utilizando `Redux`.
+- Primeiro projeto utilizando `Redux`.
 
 ## Linguagens e ferramentas usadas
 
