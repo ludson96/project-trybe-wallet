@@ -1,4 +1,4 @@
-# Repositório do projeto Trybewallet
+# Repositório do projeto Trybewallet 💳
 
 # 🚧 Estilização em desenvolvimento ! 🚧
 
