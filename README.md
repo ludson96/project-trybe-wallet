@@ -1,84 +1,79 @@
-# Repositório do projeto Trybewallet 💳
+# 💳 FinanTrack | Carteira de Câmbio & Controle de Gastos
 
-# 🚧 Estilização em desenvolvimento ! 🚧
+Uma aplicação moderna de gerenciamento financeiro pessoal com suporte a **múltiplas moedas** e **cotações em tempo real** consumidas via AwesomeAPI. O projeto foi completamente modernizado para um padrão sênior de portfólio.
 
-## Módulo: Front-end
+---
 
- Repositório possuí projeto desenvolvido no período que estive na **Trybe**, abordando conceitos de gerenciamento de estado com `Redux`.
+## 🚀 Tecnologias e Ferramentas
 
-## Informações de aprendizados
+- **React 18** (Functional Components + Hooks)
+- **TypeScript** (Tipagem estrita ponta a ponta)
+- **Tailwind CSS** (Design responsivo, dark mode elegante com efeitos glassmorphism)
+- **Redux Toolkit & React-Redux** (Gerenciamento de estado global)
+- **Axios** (Cliente HTTP assíncrono para consumo de API)
+- **Vite** (Build tool e dev server de alta performance)
+- **Vitest & React Testing Library** (Suíte moderna de testes unitários e de integração)
+- **Lucide React** (Ícones modernos)
 
-- Este é um projeto desenvolvido para aprender `Redux`;
-- Primeiro projeto utilizando `Redux`.
+---
 
-## Linguagens e ferramentas usadas
+## ✨ Funcionalidades
 
-[![Git][Git-logo]][Git-url]
-[![ESLint][ESLint-logo]][ESLint-url]
-[![HTML5][HTML5-logo]][HTML5-url]
-[![CSS3][CSS3-logo]][CSS3-url]
-[![JavaScript][JavaScript-logo]][JavaScript-url]
-[![React][React-logo]][React-url]
-[![RTL][RTL-logo]][RTL-url]
+- **Autenticação Simples**: Validação reativa de e-mail e senha com feedback visual.
+- **Dashboard Financeiro**:
+  - Cards de métricas rápidas (*Total Convertido*, *Quantidade de Transações*, *Maior Despesa*, *Moedas Estrangeiras Utilizadas*).
+- **CRUD Completo de Despesas**:
+  - Adição, visualização, edição em linha e exclusão de gastos.
+- **Conversão de Câmbio em Tempo Real**:
+  - Cotações atualizadas dinamicamente via Axios direto da AwesomeAPI.
+  - Cálculo automático e exibição simultânea do valor na moeda original e em BRL.
+- **Persistência Local**:
+  - Dados salvos em `localStorage` para manter suas despesas salvas mesmo após atualizar a página.
+- **Identidade Visual Personalizada**:
+  - Favicon SVG customizado em formato de carteira com moeda dourada e tipografia moderna (*Plus Jakarta Sans*).
 
-## O que foi desenvolvido
+---
 
-Neste projeto, desenvolvi uma carteira de controle de gastos com conversor de moedas, ao utilizar essa aplicação um usuário deverá ser capaz de:
+## 🛠️ Instalação e Execução
 
-- Adicionar, remover e editar um gasto;
-- Visualizar uma tabelas com seus gastos;
-- Visualizar o total de gastos convertidos para uma moeda de escolha.
+1. **Clone o repositório:**
+   ```bash
+   git clone git@github.com:Ludson96/project-trybe-wallet.git
+   cd project-trybe-wallet
+   ```
 
-## Habilidades
+2. **Instale as dependências:**
+   ```bash
+   npm install
+   ```
 
-Neste projeto, desenvolvi as seguintes habilidades:
+3. **Inicie o servidor de desenvolvimento:**
+   ```bash
+   npm run dev
+   ```
+   Acesse no navegador: `http://localhost:5173`
 
-- Criar um store Redux em aplicações React;
-- Criar reducers no Redux em aplicações React;
-- Criar actions no Redux em aplicações React;
-- Criar dispatchers no Redux em aplicações React;
-- Conectar Redux aos componentes React;
-- Criar actions assíncronas na sua aplicação React que faz uso de Redux.
+4. **Execute os testes automatizados com Vitest:**
+   ```bash
+   npm test
+   # Ou para modo watch iterativo:
+   npm run test:watch
+   ```
 
-## Instruções para instalar e rodar
+5. **Gere a build de produção:**
+   ```bash
+   npm run build
+   ```
 
-1. Clone o repo:
+---
 
-    ```bash
-    git clone git@github.com:Ludson96/project-trybe-wallet.git
-    ```
+## 🧪 Testes Automatizados
 
-1. Entre na pasta do repositório que você acabou de clonar:
+A aplicação conta com testes configurados no **Vitest**:
+- `Login.test.tsx`: Validação do formulário de autenticação e estados do botão de submit.
+- `Wallet.test.tsx`: Teste de integração do Dashboard, garantindo renderização de métricas e consumo da API mockada.
+- `WalletReducer.test.ts`: Testes unitários do fluxo de estado do Redux (criação, edição e exclusão).
 
-    ```bash
-    cd project-trybe-wallet
-    ```
+---
 
-1. Instale as dependências:
-
-    ```bash
-    npm install
-    ```
-
-1. Execute a aplicação `React`:
-
-    ```bash
-    npm start
-    ```
-
-1. Toda a logica se na pasta `src`, para executar os testes basta usar o comando `npm test` para executar todos os testes ou `npm test <nome do teste>` para executar um teste especifico.
-
-[Git-logo]: https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white
-[Git-url]: https://git-scm.com
-[ESLint-logo]: https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white
-[ESLint-url]: https://eslint.org/
-[HTML5-logo]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
-[HTML5-url]: https://developer.mozilla.org/pt-BR/docs/Web/HTML
-[CSS3-logo]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
-[CSS3-url]: https://developer.mozilla.org/pt-BR/docs/Web/CSS
-[JavaScript-logo]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
-[JavaScript-url]: https://www.javascript.com/
-[React-logo]: https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB
-[React-url]: https://reactjs.org
-[RTL-logo]: https://img.shields.io/badge/-TestingLibrary-%23E33332?style=for-the-badge&logo=testing-library&logoColor=white
-[RTL-url]: https://testing-library.com/
+Feito com 💚 para enriquecer o portfólio frontend.

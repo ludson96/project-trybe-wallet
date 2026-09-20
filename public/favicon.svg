@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="walletGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="coinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+  </defs>
+  <!-- Background Badge Rounded Rect -->
+  <rect width="64" height="64" rx="16" fill="#0F172A" />
+  
+  <!-- Wallet Back flap -->
+  <rect x="10" y="20" width="44" height="30" rx="6" fill="url(#walletGrad)" />
+  
+  <!-- Top card/currency peaking out -->
+  <path d="M16 16C16 14.8954 16.8954 14 18 14H46C47.1046 14 48 14.8954 48 16V22H16V16Z" fill="#34D399" opacity="0.8"/>
+  
+  <!-- Wallet Clasp Strap -->
+  <path d="M38 27H54C55.1046 27 56 27.8954 56 29V41C56 42.1046 55.1046 43 54 43H38C36.8954 43 36 42.1046 36 41V29C36 27.8954 36.8954 27 38 27Z" fill="#065F46" />
+  
+  <!-- Gold Currency Coin / Token Button -->
+  <circle cx="48" cy="35" r="4.5" fill="url(#coinGrad)" stroke="#FDE68A" stroke-width="1.5" />
+  <circle cx="48" cy="35" r="2" fill="#78350F" opacity="0.4" />
+</svg>
