@@ -51,11 +51,13 @@ describe('Wallet Page Integration', () => {
   it('renderiza o cabeçalho com o saldo inicial e cards de métricas', async () => {
     renderWallet();
 
-    expect(screen.getByText(/Finan/i)).toBeInTheDocument();
-    expect(screen.getByTestId('total-field')).toBeInTheDocument();
-    expect(screen.getByText('Despesas Totais')).toBeInTheDocument();
-    expect(screen.getByText('Registros')).toBeInTheDocument();
-    expect(screen.getByText('Maior Despesa')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(/Finan/i)).toBeInTheDocument();
+      expect(screen.getByTestId('total-field')).toBeInTheDocument();
+      expect(screen.getByText('Despesas Totais')).toBeInTheDocument();
+      expect(screen.getByText('Registros')).toBeInTheDocument();
+      expect(screen.getByText('Maior Despesa')).toBeInTheDocument();
+    });
   });
 
   it('carrega e exibe as opções de moedas vindas do mock da API', async () => {

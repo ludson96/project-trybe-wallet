@@ -20,12 +20,12 @@ describe('Login Component', () => {
     
     expect(screen.getByTestId('email-input')).toBeInTheDocument();
     expect(screen.getByTestId('password-input')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Acessar Carteira/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Entrar/i })).toBeInTheDocument();
   });
 
   it('o botão permanece desabilitado com credenciais inválidas', () => {
     renderWithProviders(<Login />);
-    const submitBtn = screen.getByRole('button', { name: /Acessar Carteira/i });
+    const submitBtn = screen.getByRole('button', { name: /Entrar/i });
     expect(submitBtn).toBeDisabled();
 
     const emailInput = screen.getByTestId('email-input');
@@ -39,7 +39,7 @@ describe('Login Component', () => {
 
   it('habilita o botão quando o email e a senha são válidos', () => {
     renderWithProviders(<Login />);
-    const submitBtn = screen.getByRole('button', { name: /Acessar Carteira/i });
+    const submitBtn = screen.getByRole('button', { name: /Entrar/i });
     const emailInput = screen.getByTestId('email-input');
     const passwordInput = screen.getByTestId('password-input');
 

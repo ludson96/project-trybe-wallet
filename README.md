@@ -38,8 +38,8 @@ Uma aplicação moderna de gerenciamento financeiro pessoal com suporte a **múl
 
 1. **Clone o repositório:**
    ```bash
-   git clone git@github.com:Ludson96/project-trybe-wallet.git
-   cd project-trybe-wallet
+   git clone git@github.com:Ludson96/finantrack-wallet.git
+   cd finantrack-wallet
    ```
 
 2. **Instale as dependências:**

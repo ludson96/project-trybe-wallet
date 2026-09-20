@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { PlusCircle, CheckCircle2, RotateCcw, Sparkles } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import {
   fetchCurrencies,
@@ -30,7 +29,6 @@ const WalletForm: React.FC = () => {
     dispatch(fetchCurrencies() as any);
   }, [dispatch]);
 
-  // Preenche o formulário se estiver no modo de edição
   useEffect(() => {
     if (editor && idToEdit !== null) {
       const expenseToEdit = expenses.find((item) => item.id === idToEdit);
@@ -86,46 +84,32 @@ const WalletForm: React.FC = () => {
   };
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
-      {/* Decorative top accent */}
-      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${
-        editor ? 'from-amber-500 to-yellow-400' : 'from-emerald-500 to-teal-400'
-      }`} />
-
-      <div className="flex items-center justify-between mb-5">
-        <div className="flex items-center gap-2.5">
-          <div className={`p-2 rounded-xl ${
-            editor ? 'bg-amber-500/15 text-amber-400' : 'bg-emerald-500/15 text-emerald-400'
-          }`}>
-            {editor ? <RotateCcw className="w-5 h-5" /> : <Sparkles className="w-5 h-5" />}
-          </div>
-          <div>
-            <h2 className="text-lg font-bold text-white">
-              {editor ? 'Editar Despesa' : 'Novo Registro de Despesa'}
-            </h2>
-            <p className="text-xs text-slate-400">
-              {editor 
-                ? 'Atualize os dados e confirme para recalcular a conversão' 
-                : 'Insira o gasto em qualquer moeda estrangeira suportada'}
-            </p>
-          </div>
+    <div className="bg-[#22262e] border border-[rgba(255,255,255,0.075)] p-6 sm:p-8">
+      <header className="flex items-center justify-between border-b border-[rgba(255,255,255,0.075)] pb-4 mb-6">
+        <div>
+          <h2 className="text-base uppercase font-bold tracking-widest text-white m-0">
+            {editor ? 'Editar Despesa' : 'Novo Registro'}
+          </h2>
+          <p className="text-xs text-[#6a707c] mt-0.5">
+            {editor ? 'Modifique os valores e confirme a atualização' : 'Cadastre uma despesa com câmbio internacional'}
+          </p>
         </div>
 
         {editor && (
           <button
             type="button"
             onClick={handleCancelEdit}
-            className="text-xs font-semibold text-slate-400 hover:text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 hover:bg-slate-800 transition-all"
+            className="text-xs uppercase font-bold tracking-wider text-[#9fa4af] hover:text-white px-3 py-1.5 border border-[rgba(255,255,255,0.15)] rounded-sm"
           >
-            Cancelar Edição
+            Cancelar
           </button>
         )}
-      </div>
+      </header>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
         {/* Valor */}
-        <div className="lg:col-span-1">
-          <label htmlFor="value" className="block text-xs font-semibold text-slate-300 mb-1.5">
+        <div className="lg:col-span-1 space-y-1">
+          <label htmlFor="value" className="block text-xs uppercase font-semibold tracking-wider text-[#a0a5ad]">
             Valor
           </label>
           <input
@@ -138,13 +122,13 @@ const WalletForm: React.FC = () => {
             placeholder="0.00"
             value={formData.value}
             onChange={handleChange}
-            className="w-full bg-slate-950/70 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all"
+            className="w-full px-3 py-2 text-sm"
           />
         </div>
 
         {/* Descrição */}
-        <div className="lg:col-span-2">
-          <label htmlFor="description" className="block text-xs font-semibold text-slate-300 mb-1.5">
+        <div className="lg:col-span-2 space-y-1">
+          <label htmlFor="description" className="block text-xs uppercase font-semibold tracking-wider text-[#a0a5ad]">
             Descrição
           </label>
           <input
@@ -153,16 +137,16 @@ const WalletForm: React.FC = () => {
             name="description"
             data-testid="description-input"
             required
-            placeholder="Ex: Jantar, Hotel, Uber..."
+            placeholder="Ex: Hospedagem, Refeição..."
             value={formData.description}
             onChange={handleChange}
-            className="w-full bg-slate-950/70 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all"
+            className="w-full px-3 py-2 text-sm"
           />
         </div>
 
         {/* Moeda */}
-        <div className="lg:col-span-1">
-          <label htmlFor="currency" className="block text-xs font-semibold text-slate-300 mb-1.5">
+        <div className="lg:col-span-1 space-y-1">
+          <label htmlFor="currency" className="block text-xs uppercase font-semibold tracking-wider text-[#a0a5ad]">
             Moeda
           </label>
           <select
@@ -171,19 +155,19 @@ const WalletForm: React.FC = () => {
             data-testid="currency-input"
             value={formData.currency}
             onChange={handleChange}
-            className="w-full bg-slate-950/70 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all"
+            className="w-full px-3 py-2 text-sm"
           >
             {currencies.map((coin) => (
-              <option key={coin} value={coin} className="bg-slate-900 text-slate-100">
+              <option key={coin} value={coin}>
                 {coin}
               </option>
             ))}
           </select>
         </div>
 
-        {/* Método de Pagamento */}
-        <div className="lg:col-span-1">
-          <label htmlFor="method" className="block text-xs font-semibold text-slate-300 mb-1.5">
+        {/* Método */}
+        <div className="lg:col-span-1 space-y-1">
+          <label htmlFor="method" className="block text-xs uppercase font-semibold tracking-wider text-[#a0a5ad]">
             Pagamento
           </label>
           <select
@@ -192,17 +176,17 @@ const WalletForm: React.FC = () => {
             data-testid="method-input"
             value={formData.method}
             onChange={handleChange}
-            className="w-full bg-slate-950/70 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all"
+            className="w-full px-3 py-2 text-sm"
           >
-            <option value="Dinheiro" className="bg-slate-900 text-slate-100">Dinheiro</option>
-            <option value="Cartão de crédito" className="bg-slate-900 text-slate-100">Cartão de crédito</option>
-            <option value="Cartão de débito" className="bg-slate-900 text-slate-100">Cartão de débito</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
           </select>
         </div>
 
-        {/* Categoria / Tag */}
-        <div className="lg:col-span-1">
-          <label htmlFor="tag" className="block text-xs font-semibold text-slate-300 mb-1.5">
+        {/* Categoria */}
+        <div className="lg:col-span-1 space-y-1">
+          <label htmlFor="tag" className="block text-xs uppercase font-semibold tracking-wider text-[#a0a5ad]">
             Categoria
           </label>
           <select
@@ -211,37 +195,23 @@ const WalletForm: React.FC = () => {
             data-testid="tag-input"
             value={formData.tag}
             onChange={handleChange}
-            className="w-full bg-slate-950/70 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all"
+            className="w-full px-3 py-2 text-sm"
           >
-            <option value="Alimentação" className="bg-slate-900 text-slate-100">Alimentação</option>
-            <option value="Lazer" className="bg-slate-900 text-slate-100">Lazer</option>
-            <option value="Trabalho" className="bg-slate-900 text-slate-100">Trabalho</option>
-            <option value="Transporte" className="bg-slate-900 text-slate-100">Transporte</option>
-            <option value="Saúde" className="bg-slate-900 text-slate-100">Saúde</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
           </select>
         </div>
 
-        {/* Botão de Enviar */}
-        <div className="col-span-full pt-2 flex justify-end">
+        {/* Submit button */}
+        <div className="col-span-full pt-3 flex justify-end">
           <button
             type="submit"
-            className={`flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 shadow-md ${
-              editor
-                ? 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-amber-500/20'
-                : 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-emerald-500/20'
-            }`}
+            className="px-6 py-2.5 rounded-sm text-xs uppercase font-bold tracking-widest bg-[#47c9e5] hover:bg-[#5ed0ea] text-[#1b1e24] transition-colors cursor-pointer"
           >
-            {editor ? (
-              <>
-                <CheckCircle2 className="w-4 h-4" />
-                Salvar Alterações
-              </>
-            ) : (
-              <>
-                <PlusCircle className="w-4 h-4" />
-                Adicionar Despesa
-              </>
-            )}
+            {editor ? 'Salvar Edição' : 'Adicionar Despesa'}
           </button>
         </div>
       </form>

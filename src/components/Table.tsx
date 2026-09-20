@@ -1,15 +1,6 @@
 import React from 'react';
-import { Edit3, Trash2, Receipt } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { deleteExpense, editExpense } from '../redux/actions';
-
-const TAG_COLORS: Record<string, string> = {
-  Alimentação: 'bg-orange-500/10 text-orange-400 border-orange-500/20',
-  Lazer: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
-  Trabalho: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-  Transporte: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
-  Saúde: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
-};
 
 const Table: React.FC = () => {
   const expenses = useAppSelector((state) => state.wallet.expenses);
@@ -26,38 +17,36 @@ const Table: React.FC = () => {
 
   if (!expenses || expenses.length === 0) {
     return (
-      <div className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-12 text-center">
-        <div className="w-12 h-12 rounded-2xl bg-slate-800 text-slate-400 flex items-center justify-center mx-auto mb-4">
-          <Receipt className="w-6 h-6" />
-        </div>
-        <h3 className="text-base font-semibold text-slate-200">Nenhuma despesa cadastrada</h3>
-        <p className="text-sm text-slate-500 max-w-sm mx-auto mt-1">
-          Adicione um novo gasto no formulário acima para visualizar o câmbio e a conversão aqui.
+      <div className="bg-[#22262e] border border-[rgba(255,255,255,0.075)] p-12 text-center">
+        <h3 className="text-sm uppercase font-bold tracking-widest text-[#a0a5ad] mb-1">
+          Nenhuma despesa lançada
+        </h3>
+        <p className="text-xs text-[#6a707c]">
+          Preencha o formulário acima para registrar sua primeira transação com câmbio.
         </p>
       </div>
     );
   }
 
   return (
-    <div className="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+    <div className="bg-[#22262e] border border-[rgba(255,255,255,0.075)] overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-slate-800 bg-slate-950/40 text-[11px] uppercase tracking-wider text-slate-400 font-semibold">
-              <th className="py-3.5 px-4">Descrição</th>
-              <th className="py-3.5 px-4">Categoria</th>
-              <th className="py-3.5 px-4">Pagamento</th>
-              <th className="py-3.5 px-4">Valor Original</th>
-              <th className="py-3.5 px-4">Moeda</th>
-              <th className="py-3.5 px-4">Câmbio Utilizado</th>
-              <th className="py-3.5 px-4">Convertido (BRL)</th>
-              <th className="py-3.5 px-4 text-center">Ações</th>
+            <tr className="border-b border-[rgba(255,255,255,0.1)] bg-[#1f232a] text-[11px] uppercase tracking-widest text-[#8b919d] font-bold">
+              <th className="py-3 px-4">Descrição</th>
+              <th className="py-3 px-4">Categoria</th>
+              <th className="py-3 px-4">Pagamento</th>
+              <th className="py-3 px-4">Valor Original</th>
+              <th className="py-3 px-4">Moeda</th>
+              <th className="py-3 px-4">Câmbio</th>
+              <th className="py-3 px-4">Convertido (BRL)</th>
+              <th className="py-3 px-4 text-center">Ações</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-800/60 text-sm">
+          <tbody className="divide-y divide-[rgba(255,255,255,0.05)] text-xs text-[#9fa4af]">
             {expenses.map((item) => {
               const currentRate = item.exchangeRates?.[item.currency];
-              const currencyName = currentRate?.name ? currentRate.name.split('/')[0] : item.currency;
               const ask = currentRate ? Number(currentRate.ask) : 1;
               const originalValue = Number(item.value) || 0;
               const convertedValue = originalValue * ask;
@@ -66,76 +55,67 @@ const Table: React.FC = () => {
               return (
                 <tr
                   key={item.id}
-                  className={`transition-colors hover:bg-slate-800/40 ${
-                    isCurrentlyEdited ? 'bg-amber-500/10' : ''
+                  className={`transition-colors hover:bg-[#282d36] ${
+                    isCurrentlyEdited ? 'bg-[#2d333e]' : ''
                   }`}
                 >
                   {/* Descrição */}
-                  <td className="py-4 px-4 font-medium text-slate-200">
+                  <td className="py-3 px-4 font-semibold text-white">
                     {item.description}
                   </td>
 
-                  {/* Categoria Badge */}
-                  <td className="py-4 px-4">
-                    <span
-                      className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border ${
-                        TAG_COLORS[item.tag] || 'bg-slate-800 text-slate-300 border-slate-700'
-                      }`}
-                    >
+                  {/* Categoria */}
+                  <td className="py-3 px-4">
+                    <span className="inline-block px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider text-[#a0a5ad] border border-[rgba(255,255,255,0.1)] rounded-sm">
                       {item.tag}
                     </span>
                   </td>
 
                   {/* Método */}
-                  <td className="py-4 px-4 text-slate-300">
+                  <td className="py-3 px-4 text-[#a0a5ad]">
                     {item.method}
                   </td>
 
                   {/* Valor Original */}
-                  <td className="py-4 px-4 font-mono font-medium text-slate-200">
+                  <td className="py-3 px-4 font-mono font-medium text-white">
                     {originalValue.toFixed(2)}
                   </td>
 
                   {/* Moeda */}
-                  <td className="py-4 px-4 text-slate-400 text-xs">
-                    <span className="font-semibold text-slate-300">{item.currency}</span>
-                    <span className="block truncate max-w-[120px] text-[11px] text-slate-500">
-                      {currencyName}
-                    </span>
+                  <td className="py-3 px-4 text-[#a0a5ad]">
+                    <span className="font-bold text-white">{item.currency}</span>
                   </td>
 
                   {/* Câmbio */}
-                  <td className="py-4 px-4 font-mono text-xs text-slate-300">
+                  <td className="py-3 px-4 font-mono text-[#a0a5ad]">
                     R$ {ask.toFixed(2)}
                   </td>
 
                   {/* Convertido */}
-                  <td className="py-4 px-4 font-mono font-semibold text-emerald-400">
+                  <td className="py-3 px-4 font-mono font-bold text-[#47c9e5]">
                     R$ {convertedValue.toFixed(2)}
                   </td>
 
                   {/* Ações */}
-                  <td className="py-4 px-4 text-center">
-                    <div className="flex items-center justify-center gap-1.5">
+                  <td className="py-3 px-4 text-center">
+                    <div className="inline-flex items-center gap-2">
                       <button
                         type="button"
                         id={String(item.id)}
                         data-testid="edit-btn"
                         onClick={() => handleEdit(item.id)}
-                        title="Editar"
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"
+                        className="text-[11px] uppercase font-bold tracking-wider text-[#9fa4af] hover:text-white px-2 py-1 border border-[rgba(255,255,255,0.1)] rounded-sm hover:border-[rgba(255,255,255,0.3)] transition-colors cursor-pointer"
                       >
-                        <Edit3 className="w-4 h-4" />
+                        Editar
                       </button>
                       <button
                         type="button"
                         id={String(item.id)}
                         data-testid="delete-btn"
                         onClick={() => handleDelete(item.id)}
-                        title="Excluir"
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
+                        className="text-[11px] uppercase font-bold tracking-wider text-[#e74c3c] hover:text-[#ff6b6b] px-2 py-1 border border-[#e74c3c]/30 rounded-sm hover:border-[#e74c3c]/60 transition-colors cursor-pointer"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        Excluir
                       </button>
                     </div>
                   </td>
