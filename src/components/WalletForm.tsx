@@ -7,6 +7,7 @@ import {
   editExpense,
 } from '../redux/actions';
 import { Expense } from '../types/wallet';
+import { Plus, Check, X, Tag, CreditCard, DollarSign, AlignLeft } from 'lucide-react';
 
 const DEFAULT_STATE = {
   value: '',
@@ -84,32 +85,32 @@ const WalletForm: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#22262e] border border-[rgba(255,255,255,0.075)] p-6 sm:p-8">
-      <header className="flex items-center justify-between border-b border-[rgba(255,255,255,0.075)] pb-4 mb-6">
-        <div>
-          <h2 className="text-base uppercase font-bold tracking-widest text-white m-0">
-            {editor ? 'Editar Despesa' : 'Novo Registro'}
+    <div className="bg-white border border-[#e5e7eb] rounded-2xl p-6 shadow-sm">
+      <div className="flex items-center justify-between pb-4 mb-5 border-b border-[#f3f4f6]">
+        <div className="flex items-center gap-2">
+          <div className={`w-2.5 h-2.5 rounded-full ${editor ? 'bg-[#f59e0b]' : 'bg-[#10b981]'}`} />
+          <h2 className="text-sm font-bold text-[#1f2937]">
+            {editor ? 'Editar Lançamento' : 'Novo Lançamento com Câmbio'}
           </h2>
-          <p className="text-xs text-[#6a707c] mt-0.5">
-            {editor ? 'Modifique os valores e confirme a atualização' : 'Cadastre uma despesa com câmbio internacional'}
-          </p>
         </div>
 
         {editor && (
           <button
             type="button"
             onClick={handleCancelEdit}
-            className="text-xs uppercase font-bold tracking-wider text-[#9fa4af] hover:text-white px-3 py-1.5 border border-[rgba(255,255,255,0.15)] rounded-sm"
+            className="inline-flex items-center gap-1 text-xs font-medium text-[#6b7280] hover:text-[#111827] px-2.5 py-1 rounded-md border border-[#e5e7eb] hover:bg-[#f9fafb] transition-colors cursor-pointer"
           >
+            <X className="w-3.5 h-3.5" />
             Cancelar
           </button>
         )}
-      </header>
+      </div>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
         {/* Valor */}
-        <div className="lg:col-span-1 space-y-1">
-          <label htmlFor="value" className="block text-xs uppercase font-semibold tracking-wider text-[#a0a5ad]">
+        <div className="lg:col-span-1">
+          <label htmlFor="value" className="flex items-center gap-1 text-xs font-semibold text-[#4b5563] mb-1.5">
+            <DollarSign className="w-3.5 h-3.5 text-[#9ca3af]" />
             Valor
           </label>
           <input
@@ -119,16 +120,17 @@ const WalletForm: React.FC = () => {
             name="value"
             data-testid="value-input"
             required
-            placeholder="0.00"
+            placeholder="0,00"
             value={formData.value}
             onChange={handleChange}
-            className="w-full px-3 py-2 text-sm"
+            className="w-full px-3 py-2 text-sm font-medium"
           />
         </div>
 
         {/* Descrição */}
-        <div className="lg:col-span-2 space-y-1">
-          <label htmlFor="description" className="block text-xs uppercase font-semibold tracking-wider text-[#a0a5ad]">
+        <div className="lg:col-span-2">
+          <label htmlFor="description" className="flex items-center gap-1 text-xs font-semibold text-[#4b5563] mb-1.5">
+            <AlignLeft className="w-3.5 h-3.5 text-[#9ca3af]" />
             Descrição
           </label>
           <input
@@ -137,7 +139,7 @@ const WalletForm: React.FC = () => {
             name="description"
             data-testid="description-input"
             required
-            placeholder="Ex: Hospedagem, Refeição..."
+            placeholder="Ex: Almoço de negócios, Hospedagem..."
             value={formData.description}
             onChange={handleChange}
             className="w-full px-3 py-2 text-sm"
@@ -145,8 +147,8 @@ const WalletForm: React.FC = () => {
         </div>
 
         {/* Moeda */}
-        <div className="lg:col-span-1 space-y-1">
-          <label htmlFor="currency" className="block text-xs uppercase font-semibold tracking-wider text-[#a0a5ad]">
+        <div className="lg:col-span-1">
+          <label htmlFor="currency" className="block text-xs font-semibold text-[#4b5563] mb-1.5">
             Moeda
           </label>
           <select
@@ -155,7 +157,7 @@ const WalletForm: React.FC = () => {
             data-testid="currency-input"
             value={formData.currency}
             onChange={handleChange}
-            className="w-full px-3 py-2 text-sm"
+            className="w-full px-3 py-2 text-sm font-medium"
           >
             {currencies.map((coin) => (
               <option key={coin} value={coin}>
@@ -165,9 +167,10 @@ const WalletForm: React.FC = () => {
           </select>
         </div>
 
-        {/* Método */}
-        <div className="lg:col-span-1 space-y-1">
-          <label htmlFor="method" className="block text-xs uppercase font-semibold tracking-wider text-[#a0a5ad]">
+        {/* Pagamento */}
+        <div className="lg:col-span-1">
+          <label htmlFor="method" className="flex items-center gap-1 text-xs font-semibold text-[#4b5563] mb-1.5">
+            <CreditCard className="w-3.5 h-3.5 text-[#9ca3af]" />
             Pagamento
           </label>
           <select
@@ -185,8 +188,9 @@ const WalletForm: React.FC = () => {
         </div>
 
         {/* Categoria */}
-        <div className="lg:col-span-1 space-y-1">
-          <label htmlFor="tag" className="block text-xs uppercase font-semibold tracking-wider text-[#a0a5ad]">
+        <div className="lg:col-span-1">
+          <label htmlFor="tag" className="flex items-center gap-1 text-xs font-semibold text-[#4b5563] mb-1.5">
+            <Tag className="w-3.5 h-3.5 text-[#9ca3af]" />
             Categoria
           </label>
           <select
@@ -205,13 +209,27 @@ const WalletForm: React.FC = () => {
           </select>
         </div>
 
-        {/* Submit button */}
-        <div className="col-span-full pt-3 flex justify-end">
+        {/* Submit */}
+        <div className="col-span-full pt-2 flex justify-end">
           <button
             type="submit"
-            className="px-6 py-2.5 rounded-sm text-xs uppercase font-bold tracking-widest bg-[#47c9e5] hover:bg-[#5ed0ea] text-[#1b1e24] transition-colors cursor-pointer"
+            className={`inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all shadow-sm cursor-pointer ${
+              editor
+                ? 'bg-[#f59e0b] hover:bg-[#d97706]'
+                : 'bg-[#10b981] hover:bg-[#059669]'
+            }`}
           >
-            {editor ? 'Salvar Edição' : 'Adicionar Despesa'}
+            {editor ? (
+              <>
+                <Check className="w-4 h-4" />
+                Salvar Alterações
+              </>
+            ) : (
+              <>
+                <Plus className="w-4 h-4" />
+                Adicionar Despesa
+              </>
+            )}
           </button>
         </div>
       </form>

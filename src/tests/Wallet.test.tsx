@@ -54,9 +54,9 @@ describe('Wallet Page Integration', () => {
     await waitFor(() => {
       expect(screen.getByText(/Finan/i)).toBeInTheDocument();
       expect(screen.getByTestId('total-field')).toBeInTheDocument();
-      expect(screen.getByText('Despesas Totais')).toBeInTheDocument();
-      expect(screen.getByText('Registros')).toBeInTheDocument();
-      expect(screen.getByText('Maior Despesa')).toBeInTheDocument();
+      expect(screen.getByText('Despesas em BRL')).toBeInTheDocument();
+      expect(screen.getByText('Total de Lançamentos')).toBeInTheDocument();
+      expect(screen.getByText('Maior Gasto')).toBeInTheDocument();
     });
   });
 

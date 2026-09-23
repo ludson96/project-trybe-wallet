@@ -7,25 +7,29 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Source Sans Pro"', 'sans-serif'],
-        heading: ['"Source Sans Pro"', 'sans-serif'],
+        sans: ['"Inter"', 'sans-serif'],
       },
       colors: {
-        theme: {
-          bg: '#1b1e24',
-          card: '#22262e',
-          cardHover: '#282d36',
-          border: 'rgba(255, 255, 255, 0.075)',
-          borderStrong: 'rgba(255, 255, 255, 0.2)',
-          accent: '#47c9e5',
-          accentHover: '#5ed0ea',
-          heading: '#ffffff',
-          text: '#9fa4af',
-          muted: '#6a707c',
+        organizze: {
+          bg: '#f4f6f9',
+          card: '#ffffff',
+          sidebar: '#ffffff',
+          primary: '#10b981', // Verde Organizze oficial
+          primaryHover: '#059669',
+          secondary: '#3b82f6',
+          danger: '#ef4444',
+          dangerLight: '#fef2f2',
+          success: '#10b981',
+          successLight: '#ecfdf5',
+          border: '#e5e7eb',
+          textMain: '#1f2937',
+          textMuted: '#6b7280',
+          textSub: '#9ca3af',
         }
       },
-      letterSpacing: {
-        widest: '0.2em',
+      boxShadow: {
+        card: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03)',
+        dropdown: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
       }
     },
   },

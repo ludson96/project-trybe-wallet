@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../redux/store';
 import { actionEmail } from '../redux/actions';
+import { Lock, Mail, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -20,119 +21,130 @@ const Login: React.FC = () => {
     navigate('/carteira');
   };
 
+  const fillDemo = () => {
+    setEmail('ludson.pereira26@gmail.com');
+    setPassword('123456789');
+  };
+
   return (
-    <div className="min-h-screen bg-[#1b1e24] flex items-center justify-center p-6 sm:p-12">
-      {/* Paradigm Shift Container */}
-      <div className="w-full max-w-5xl bg-[#22262e] border border-[rgba(255,255,255,0.075)] rounded-sm grid grid-cols-1 lg:grid-cols-12 overflow-hidden shadow-2xl">
-        
-        {/* Left Editorial / Intro Section */}
-        <section className="lg:col-span-5 p-8 sm:p-12 border-b lg:border-b-0 lg:border-r border-[rgba(255,255,255,0.075)] flex flex-col justify-between bg-[#1f232a]">
-          <div>
-            <div className="inline-block border-b-2 border-[#47c9e5] pb-2 mb-6">
-              <span className="text-xs uppercase font-bold tracking-[0.25em] text-[#47c9e5]">
-                Financial Portfolio
-              </span>
-            </div>
-            
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4 leading-tight">
-              FinanTrack
-            </h1>
-            
-            <p className="text-[#9fa4af] text-sm leading-relaxed mb-6 font-light">
-              Uma ferramenta simplificada para acompanhamento e conversão inteligente de despesas multimoedas com cotação ao vivo.
-            </p>
-
-            <ul className="space-y-3 text-xs tracking-wider uppercase text-[#7b818d] font-semibold border-t border-[rgba(255,255,255,0.05)] pt-6">
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-[#47c9e5] rounded-full"></span>
-                API de Câmbio em Tempo Real
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-[#47c9e5] rounded-full"></span>
-                Controle de Gastos & Conversão
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-[#47c9e5] rounded-full"></span>
-                Persistência Local Automática
-              </li>
-            </ul>
+    <div className="min-h-screen bg-[#f4f6f9] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      {/* Brand Header */}
+      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center mb-6">
+        <div className="inline-flex items-center justify-center gap-2 mb-3">
+          <div className="w-10 h-10 rounded-xl bg-[#10b981] flex items-center justify-center text-white font-bold text-xl shadow-sm">
+            F
           </div>
+          <span className="text-2xl font-bold text-[#1f2937] tracking-tight">
+            Finan<span className="text-[#10b981]">Track</span>
+          </span>
+        </div>
+        <h2 className="text-xl font-semibold text-[#374151]">
+          Acesse sua conta
+        </h2>
+        <p className="mt-1 text-xs text-[#6b7280]">
+          Gerencie seus gastos e conversões de moedas em um só lugar
+        </p>
+      </div>
 
-          <div className="pt-8 mt-8 border-t border-[rgba(255,255,255,0.05)] text-[11px] text-[#6a707c] tracking-widest uppercase">
-            React &bull; TypeScript &bull; Redux &bull; Tailwind
-          </div>
-        </section>
-
-        {/* Right Form Section */}
-        <section className="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-center">
-          <header className="mb-8">
-            <h2 className="text-xl font-bold text-white tracking-wide uppercase text-sm mb-1">
-              Acesso à Carteira
-            </h2>
-            <p className="text-xs text-[#7b818d]">
-              Insira suas credenciais para gerenciar seus registros financeiros.
-            </p>
-          </header>
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
+      {/* Login Card */}
+      <div className="sm:mx-auto sm:w-full sm:max-w-md px-4">
+        <div className="bg-white py-8 px-6 sm:px-10 shadow-sm border border-[#e5e7eb] rounded-2xl">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* E-mail field */}
+            <div>
               <label 
                 htmlFor="email" 
-                className="block text-xs uppercase font-semibold tracking-widest text-[#a0a5ad]"
+                className="block text-xs font-semibold text-[#374151] mb-1.5"
               >
                 E-mail
               </label>
-              <input
-                type="email"
-                id="email"
-                data-testid="email-input"
-                placeholder="seu.email@exemplo.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 text-sm placeholder-[#555a64]"
-                required
-              />
+              <div className="relative rounded-lg">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#9ca3af]">
+                  <Mail className="h-4 w-4" />
+                </div>
+                <input
+                  type="email"
+                  id="email"
+                  data-testid="email-input"
+                  placeholder="exemplo@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-9 pr-3.5 py-2.5 text-sm"
+                  required
+                />
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
+            {/* Password field */}
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
                 <label 
                   htmlFor="password" 
-                  className="block text-xs uppercase font-semibold tracking-widest text-[#a0a5ad]"
+                  className="block text-xs font-semibold text-[#374151]"
                 >
                   Senha
                 </label>
-                <span className="text-[11px] text-[#6a707c]">Mínimo de 6 caracteres</span>
+                <span className="text-[11px] text-[#9ca3af]">Mínimo de 6 dígitos</span>
               </div>
-              <input
-                type="password"
-                id="password"
-                data-testid="password-input"
-                placeholder="••••••"
-                minLength={6}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 text-sm placeholder-[#555a64]"
-                required
-              />
+              <div className="relative rounded-lg">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#9ca3af]">
+                  <Lock className="h-4 w-4" />
+                </div>
+                <input
+                  type="password"
+                  id="password"
+                  data-testid="password-input"
+                  placeholder="••••••••"
+                  minLength={6}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-9 pr-3.5 py-2.5 text-sm"
+                  required
+                />
+              </div>
             </div>
 
-            <div className="pt-2">
+            {/* Submit Button */}
+            <div>
               <button
                 type="submit"
                 disabled={!isFormValid}
-                className={`w-full py-3.5 px-6 rounded-sm text-xs font-bold uppercase tracking-[0.15em] transition-colors duration-150 ${
+                className={`w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all duration-150 shadow-sm ${
                   isFormValid
-                    ? 'bg-[#47c9e5] hover:bg-[#5ed0ea] text-[#1b1e24] cursor-pointer'
-                    : 'bg-[rgba(255,255,255,0.05)] text-[#555a64] border border-[rgba(255,255,255,0.05)] cursor-not-allowed'
+                    ? 'bg-[#10b981] hover:bg-[#059669] text-white cursor-pointer active:scale-[0.99]'
+                    : 'bg-[#e5e7eb] text-[#9ca3af] cursor-not-allowed'
                 }`}
               >
-                Entrar
+                <span>Entrar</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </form>
-        </section>
 
+          {/* Demo Credentials Quick Fill */}
+          <div className="mt-6 pt-5 border-t border-[#f3f4f6]">
+            <button
+              type="button"
+              onClick={fillDemo}
+              className="w-full py-2 px-3 bg-[#f8fafc] hover:bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg text-xs font-medium text-[#475569] flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#10b981]" />
+              Preencher com credencial de teste
+            </button>
+          </div>
+
+          <div className="mt-4 text-center">
+            <span className="inline-flex items-center gap-1.5 text-[11px] text-[#9ca3af]">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#10b981]" />
+              Ambiente seguro com criptografia de ponta
+            </span>
+          </div>
+        </div>
+
+        {/* Footer info */}
+        <p className="mt-6 text-center text-xs text-[#9ca3af]">
+          FinanTrack &bull; Sistema de Gestão Financeira Pessoal
+        </p>
       </div>
     </div>
   );
