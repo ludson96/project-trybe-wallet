@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../redux/store';
 import { actionEmail } from '../redux/actions';
-import { Lock, Mail, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Lock, Mail, ArrowRight } from 'lucide-react';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -19,11 +19,6 @@ const Login: React.FC = () => {
     if (!isFormValid) return;
     dispatch(actionEmail(email));
     navigate('/carteira');
-  };
-
-  const fillDemo = () => {
-    setEmail('ludson.pereira26@gmail.com');
-    setPassword('123456789');
   };
 
   return (
@@ -120,25 +115,6 @@ const Login: React.FC = () => {
               </button>
             </div>
           </form>
-
-          {/* Demo Credentials Quick Fill */}
-          <div className="mt-6 pt-5 border-t border-[#f3f4f6]">
-            <button
-              type="button"
-              onClick={fillDemo}
-              className="w-full py-2 px-3 bg-[#f8fafc] hover:bg-[#f1f5f9] border border-[#e2e8f0] rounded-lg text-xs font-medium text-[#475569] flex items-center justify-center gap-2 transition-colors cursor-pointer"
-            >
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#10b981]" />
-              Preencher com credencial de teste
-            </button>
-          </div>
-
-          <div className="mt-4 text-center">
-            <span className="inline-flex items-center gap-1.5 text-[11px] text-[#9ca3af]">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#10b981]" />
-              Ambiente seguro com criptografia de ponta
-            </span>
-          </div>
         </div>
 
         {/* Footer info */}

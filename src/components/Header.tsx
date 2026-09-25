@@ -33,18 +33,6 @@ const Header: React.FC = () => {
               Finan<span className="text-[#10b981]">Track</span>
             </span>
           </div>
-
-          <nav className="hidden md:flex items-center gap-1">
-            <span className="px-3 py-1.5 text-xs font-semibold text-[#10b981] bg-[#ecfdf5] rounded-md">
-              Visão Geral
-            </span>
-            <span className="px-3 py-1.5 text-xs font-medium text-[#6b7280] hover:text-[#111827] rounded-md cursor-default">
-              Lançamentos
-            </span>
-            <span className="px-3 py-1.5 text-xs font-medium text-[#6b7280] hover:text-[#111827] rounded-md cursor-default">
-              Cotações
-            </span>
-          </nav>
         </div>
 
         {/* Right Info & Actions */}
